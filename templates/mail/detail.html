@@ -1,0 +1,35 @@
+{% extends "base_2.html" %}
+{% block title %}mail{% endblock%}
+{% block main %}
+<div id="main">
+    <div id="content">
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">收件箱</span>
+            </div>
+            <div class="inner">
+                <div id="change_pass_form" class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label" for="new_pass">发件人：</label>
+                        <div class="controls">
+                            {{ sender.username }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="new_pass">收件人：</label>
+                        <div class="controls">
+                            {{ receiver.username }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="new_pass">邮件内容：</label>
+                        <div class="controls">
+                            {{ message.content }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+.idea
+*log.txt
+*.pyc
+
+# 带密码文件
+config.py
+secret.py
+database_secret.conf
+
+
+postfix.conf
+config.py
+markdown_demo.py
+deploy.sh
+deploy1.sh
+deploy2.sh
+get-pip.py
+# 虚拟机相关文件
+
+misc
+ubuntu*.log
+Vagrantfile
+.vagrant
+

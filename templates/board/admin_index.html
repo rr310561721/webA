@@ -1,0 +1,73 @@
+{% extends "base_2.html" %}
+{% block title %}论坛板块{% endblock%}
+{% block main %}
+<div id="main">
+    <div id="content">
+        <div class="panel">
+            <div class="header">
+                <ul class="breadcrumb">
+                    <li class="active">新增板块</li>
+                </ul>
+            </div>
+            <div class="inner">
+                <form class="form-horizontal" method="post" action="{{ url_for('board.add') }}">
+                    <div class="control-group">
+                        <label class="control-label">版块</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge"  name="title">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <input type="submit" class="span-primary" value="添加">
+                    </div>
+                </form>
+            </div>
+        </div>
+               <div class="panel">
+            <div class="header">
+                <ul class="breadcrumb">
+                    <li class="active">删除板块</li>
+                </ul>
+            </div>
+            <div class="inner">
+                <form class="form-horizontal" action="{{ url_for('board.delete') }}">
+                    <label class="control-label">选择版块：</label>
+                    <select name="board_id" id="delete_board" required>
+                        {% for b in bs %}
+                            {% if bid == b.id %}
+                                <option value="{{ b.id }}" selected >{{ b.title }}</option>
+                            {% else %}
+                                <option value="{{ b.id }}" >{{ b.title }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <input type="submit" class="span-primary"  value="删除">
+                </form>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="header">
+                <ul class="breadcrumb">
+                    <li class="active">修改板块</li>
+                </ul>
+            </div>
+            <div class="inner">
+                <form class="form-horizontal" method="post" action="{{ url_for('board.update') }}">
+                    <label class="control-label">选择版块：</label>
+                    <select name="board_id" id="board" required>
+                        {% for b in bs %}
+                            {% if bid == b.id %}
+                                <option value="{{ b.id }}" selected >{{ b.title }}</option>
+                            {% else %}
+                                <option value="{{ b.id }}" >{{ b.title }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <input type="text" class="input-xlarge" name="title">
+                    <input type="submit" class="span-primary" value="修改">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

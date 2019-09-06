@@ -1,0 +1,128 @@
+{% extends "base_2.html" %}
+{% block title %}profile{% endblock%}
+{% block main %}
+<!-- navbar -->
+<div id="main">
+    {# 主页 #}
+    <div id="content">
+        {# 用户名和注册时间 #}
+        <div class="panel">
+            <div class="header">
+                <ul class="breadcrumb">
+                    <li><a href="{{ url_for('topic.index') }}">主页</a><span class="divider">/个人信息</span></li>
+                </ul>
+            </div>
+            <div class="inner userinfo">
+                <div class="user_big_avatar">
+                    <img src="{{ user.avatar }}" class="user_avatar" title="{{ user.username }}">
+                </div>
+                <a class="dark">{{ user.username }}</a>
+                <div class="user_profile"></div>
+                <a class="dark">个性签名 ：“ {{ user.note }} ”</a>
+                <p class="col_fade">注册时间 {{user.created_time | format_time}}</p>
+            </div>
+        </div>
+        {# 创建的话题 #}
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">最近创建的话题</span>
+            </div>
+            {% for t in topics_cj %}
+            <div class="cell">
+                <a class="user_avatar pull-left">
+                    <img src="{{ user.avatar }}" title="{{ user.username }}">
+                </a>
+                <span class="reply_count pull-left">
+                    <span class="count_of_replies" title="回复数"> {{ t.replies() | count }} </span>
+                    <span class="count_seperator"> / </span>
+                    <span class="count_of_visits" title="点击数"> {{ t.views }} </span>
+                </span>
+                <a class="last_time pull-right">
+                    <span class="last_active_time" data-created_time="{{ t.created_time }}"></span>
+                </a>
+                <div class="topic_title_wrapper">
+                    <a class="topic_title" href="{{ url_for('topic.detail', id=t.id) }}" title="{{ t.title }}">
+                        {{ t.title }}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="cell more"></div>
+        </div>
+        {# 参与的话题 #}
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">最近参与的话题</span>
+            </div>
+            {% for m in topics_cy %}
+            <div class="cell">
+                <a class="user_avatar pull-left">
+                    <img src="{{ user.avatar }}" title="{{ user.username }}">
+                </a>
+                <span class="reply_count pull-left">
+                    <span class="count_of_replies" title="回复数"> {{ m.replies() | count }} </span>
+                    <span class="count_seperator"> / </span>
+                    <span class="count_of_visits" title="点击数"> {{ m.views }} </span>
+                </span>
+                <a class="last_time pull-right">
+                    <span class="last_active_time" data-created_time="{{ m.created_time }}"></span>
+                </a>
+                <div class="topic_title_wrapper">
+                    <a class="topic_title" href="{{ url_for('topic.detail', id=m.id) }}" title="{{ m.title }}">
+                        {{ m.title }}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="cell more"></div>
+        </div>
+    </div>
+</div>
+<script>
+    var e = function (sel) {
+        return document.querySelector(sel)
+    }
+
+    var es = function (sel) {
+        return document.querySelectorAll(sel)
+    }
+
+    var registerTimer = function () {
+        setInterval(function () {
+            var times = es('.last_active_time')
+            for (var i = 0; i < times.length; i++) {
+                var t = times[i]
+                var time = Number(t.dataset.created_time)
+                var now = Math.floor(new Date() / 1000)
+                var delta = now - time
+              if (delta >= 2592000) {
+                  delta = Math.floor(delta / 2592000)
+                  var month = `${delta} 月前`
+                  t.innerText = month
+              } else if (delta >= 86400) {
+                  delta = Math.floor(delta / 86400)
+                  var day = `${delta} 天前`
+                  t.innerText = day
+              }else if (delta >= 3600) {
+                  delta = Math.floor(delta / 3600)
+                  var hour = `${delta} 小時前`
+                  t.innerText = hour
+              }else if (delta >= 60) {
+                  delta = Math.floor(delta / 60)
+                  var minute = `${delta} 分钟前`
+                  t.innerText = minute
+              } else if (delta < 60) {
+                  var second = `${delta} 秒前`
+                  t.innerText = second
+              }
+            }
+        }, 1000)
+    }
+
+    var __main = function () {
+        registerTimer()
+    }
+
+    __main()
+</script>
+{% endblock %}

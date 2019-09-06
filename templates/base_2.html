@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="//cdn.bootcss.com/prism/1.8.0/themes/prism.css" rel="stylesheet">
+<head>
+<body>
+
+<!-- navbar -->
+<div class='navbar'>
+  <div class='navbar-inner'>
+    <div class='container'>
+      <ul class='nav pull-right'>
+        <li><a href="{{ url_for('topic.index') }}">首页</a></li>
+        <li><a href="{{ url_for('user.set_view') }}">设置</a></li>
+        <li><a href="{{ url_for('mail.index') }}">消息</a></li>
+        <li><a href="{{ url_for('user.logout') }}">退出</a></li>
+      </ul>
+      <a class="btn btn-navbar" id="responsive-sidebar-trigger">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+{% block main %}
+{% endblock %}
+
+
+<footer class="footer navbar-fixed-bottom ">
+    <div class="container">
+        <p class="dark" style="text-align: right">学习用网站</p>
+    </div>
+</footer>
+
+
+  </div>
+</div>
+
+</body>
