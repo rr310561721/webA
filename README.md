@@ -15,6 +15,6 @@
 ![图片](https://github.com/rr310561721/webA/blob/master/gif/set.gif)
 
 ## 发送消息
-![图片](https://github.com/rr310561721/webA/blob/master/gif/mail.gif)
+![图片](https://github.com/rr310561721/webA/blob/master/gif/消息.gif)
 
 
